@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RR Training</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #00274d; /* Dark Navy Blue color */
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin: 10px 0 0;
+            color: #ffeb3b; /* Yellow color for the header text */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 2em;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input, select {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #00274d; /* Dark Navy Blue color */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #001f3f; /* Slightly darker navy blue for hover effect */
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #00274d; /* Dark Navy Blue color */
+            color: #fff;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9f7ef;
+            border: 1px solid #d4edda;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .result h3 {
+            color: #155724;
+            margin-top: 0;
+        }
+
+        .result a {
+            text-decoration: none;
+            color: #00274d; /* Dark Navy Blue color */
+        }
+
+        .result a:hover {
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .contact-info h3 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>RR Training</h1>
+        <p>Customized workout plans tailored to your needs</p>
+    </header>
+
+    <div class="container">
+        <h2>About Us</h2>
+        <p>Welcome to RR Training, your ultimate destination for personalized workout plans! At RR Training, we believe that every individual is unique, and so are their fitness needs. Our mission is to provide you with tailored workout plans that align with your fitness level, goals, and available equipment.</p>
+        <p>We understand that achieving your fitness goals requires more than just a one-size-fits-all approach. That’s why we offer a range of customizable plans designed to fit various levels of experience and equipment access. Whether you're just starting out, looking to break through a plateau, or aiming to push your limits, we’ve got you covered.</p>
+        <p>Our commitment to quality and personalization ensures that you get the most effective and efficient workouts to help you succeed. Join us and take the first step towards a healthier, stronger you!</p>
+
+        <h2>Find Your Perfect Workout Plan</h2>
+        <form id="workoutForm">
+            <div id="step1">
+                <label for="equipment">Available Equipment:</label>
+                <select id="equipment" required onchange="showNextStep('step2')">
+                    <option value="" disabled selected>Select available equipment</option>
+                    <option value="bodyweight">Bodyweight Only</option>
+                    <option value="basic">Dumbbells and Resistance Bands</option>
+                    <option value="full_gym">Full Gym Setup</option>
+                </select>
+            </div>
+
+            <div id="step2" class="hidden">
+                <label for="experience">Training Experience:</label>
+                <select id="experience" required onchange="showNextStep('step3')">
+                    <option value="" disabled selected>Select your experience</option>
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                </select>
+            </div>
+
+            <div id="step3" class="hidden">
+                <label for="gender">Gender:</label>
+                <select id="gender" required onchange="showNextStep('step4')">
+                    <option value="" disabled selected>Select your gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div id="step4" class="hidden">
+                <label for="age">Age:</label>
+                <input type="number" id="age" required min="13" max="100" placeholder="Enter your age" oninput="showNextStep('step5')">
+            </div>
+
+            <div id="step5" class="hidden">
+                <label for="split">Workout Split:</label>
+                <select id="split" required onchange="showNextStep('submitStep')">
+                    <option value="" disabled selected>Select workout split</option>
+                    <option value="full_body">Full Body</option>
+                    <option value="upper_lower">Upper/Lower</option>
+                    <option value="ppl_3day">Push/Pull/Legs (3-Day)</option>
+                    <option value="ppl_6day">Push/Pull/Legs (6-Day)</option>
+                </select>
+            </div>
+
+            <div id="submitStep" class="hidden">
+                <button type="button" onclick="showWorkoutPlan()">Get Your Plan</button>
+            </div>
+        </form>
+
+        <div class="result" id="result">
+            <h3>Your Recommended Workout Plan:</h3>
+            <p id="planLink"></p>
+        </div>
+
+        <div class="contact-info">
+            <h3>Contact Us</h3>
+            <p>For personalized workout plans tailored specifically to your needs, reach out to us at <a href="mailto:riditkumar8@gmail.com">riditkumar8@gmail.com</a>. Our personalized plan is available for just $9. Don’t miss out on the opportunity to get a plan that fits you perfectly!</p>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 RR Training. All rights reserved.
+    </footer>
+
+    <script>
+        function showNextStep(stepId) {
+            document.getElementById(stepId).classList.remove('hidden');
+        }
+
+        function showWorkoutPlan() {
+            const equipment = document.getElementById('equipment').value;
+            const experience = document.getElementById('experience').value;
+            const split = document.getElementById('split').value;
+
+            let planLink = '';
+
+            // Map the selection to the correct PDF
+            if (equipment === 'bodyweight') {
+                if (experience === 'beginner') {
+                    planLink = mapBodyweightPDF(split, 'beginner');
+                } else if (experience === 'intermediate') {
+                    planLink = mapBodyweightPDF(split, 'intermediate');
+                } else if (experience === 'advanced') {
+                    planLink = mapBodyweightPDF(split, 'advanced');
+                }
+            } else if (equipment === 'basic') {
+                if (experience === 'beginner') {
+                    planLink = mapBasicPDF(split, 'beginner');
+                } else if (experience === 'intermediate') {
+                    planLink = mapBasicPDF(split, 'intermediate');
+                } else if (experience === 'advanced') {
+                    planLink = mapBasicPDF(split, 'advanced');
+                }
+            } else if (equipment === 'full_gym') {
+                if (experience === 'beginner') {
+                    planLink = mapFullGymPDF(split, 'beginner');
+                } else if (experience === 'intermediate') {
+                    planLink = mapFullGymPDF(split, 'intermediate');
+                } else if (experience === 'advanced') {
+                    planLink = mapFullGymPDF(split, 'advanced');
+                }
+            }
+
+            document.getElementById('planLink').innerHTML = planLink;
+            document.getElementById('result').style.display = 'block';
+        }
+
+        function mapBodyweightPDF(split, level) {
+            return `<a href="path/to/bodyweight-${level}-${split}.pdf" download>Download ${capitalize(level)} Bodyweight ${capitalize(split)} Workout Plan</a>`;
+        }
+
+        function mapBasicPDF(split, level) {
+            return `<a href="path/to/basic-${level}-${split}.pdf" download>Download ${capitalize(level)} Dumbbell and Resistance Bands ${capitalize(split)} Workout Plan</a>`;
+        }
+
+        function mapFullGymPDF(split, level) {
+            return `<a href="path/to/fullgym-${level}-${split}.pdf" download>Download ${capitalize(level)} Full Gym ${capitalize(split)} Workout Plan</a>`;
+        }
+
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+    </script>
+
+</body>
+</html>
